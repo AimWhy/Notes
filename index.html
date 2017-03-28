@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2.2.6"></script>
+    <script src="https://unpkg.com/fastclick@1.0.6"></script>
+    <style>
+    #app span{ display: inline-block; padding: 15px; border:1px solid yellow;}
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <span v-for="(tab,index) in tabArr" v-text="tab.title" @click="switchTab(tab)"></span>
+        <div v-text="curr.content"></div>
+    </div>
+    <script>
+        FastClick.attach(document.body);
+        window.app = new Vue({
+            el: "#app",
+            data: {
+                tabArr: [{ title: 'a', content: 'aaaaaa' },
+                { title: 'b', content: 'bbbbbb' },
+                { title: 'c', content: 'cccccc' }],
+                curr: {content:'eee'}
+            },
+            methods: {
+                switchTab: function (d) {
+                    this.curr = d;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
