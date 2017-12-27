@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Skeleton Screen</title>
+  <style>
+    :root {
+      --card-padding: 1rem;
+      --card-width: 80rem;
+      --card-height: 10rem;
+
+      --card-bg-color: #fafafa;
+      --card-txt-color: #c9c9c9;
+      --card-dot-color: #7a7a7a;
+      --card-border: 1px solid #acacac;
+      --card-border-radius: 2px;
+
+      --avatar-radius: 2px%;
+      --avatar-size: 4rem;
+      --dot-size: .5rem;
+
+      --title-height: .875rem;
+      --title-margin-top: .75rem;
+      --title-margin-left: .75rem;
+      --title-space: .6rem;
+
+      --txt-height: .75rem;
+      --txt-margin: .7rem;
+      --txt-space: .5rem;
+    }
+
+    @keyframes card-dot-a {
+      8% {
+        transform: translateY(0);
+      }
+      22% {
+        transform: translateY(-65%);
+      }
+      36% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes card-dot-b {
+      36% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-90%);
+      }
+      64% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes card-dot-c {
+      64% {
+        transform: translateY(0);
+      }
+      78% {
+        transform: translateY(-65%);
+      }
+      92% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes loading {
+      to {
+        background-position: 200% 0;
+      }
+    }
+
+    .card-container,
+    .card-media,
+    .card-heading,
+    .card-text {
+      display: block;
+      position: relative;
+      box-sizing: border-box;
+      background: var(--card-txt-color);
+    }
+
+    .card-media:before,
+    .card-media:after,
+    .card-heading::before,
+    .card-heading::after,
+    .card-text::before,
+    .card-text::after {
+      box-sizing: border-box;
+      position: absolute;
+      content: '';
+      background: var(--card-txt-color);
+    }
+
+    .card-container {
+      width: var(--card-width);
+      height: var(--card-height);
+      background: var(--card-bg-color);
+      border-radius: var(--card-border-radius);
+      border: var(--card-border);
+      padding: var(--card-padding);
+    }
+
+    .card-container:after {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-image: linear-gradient(90deg, rgba(250, 250, 250, 0) 0, rgba(250, 250, 250, .5) 50%, rgba(250, 250, 250, 0) 100%);
+      background-size: 50% 100%;
+      background-position: -150% 0;
+      background-repeat: no-repeat;
+      animation: loading 1.5s infinite;
+    }
+
+    .card-media:before,
+    .card-media:after,
+    .card-heading:before {
+      width: var(--dot-size);
+      height: var(--dot-size);
+      top: calc(var(--avatar-size) / 2 - var(--dot-size) / 2);
+      left: calc(var(--avatar-size) / 2 - var(--dot-size) / 2);
+      background: var(--card-dot-color);
+      border-radius: 100%;
+    }
+
+    .card-media {
+      width: var(--avatar-size);
+      height: var(--avatar-size);
+      border-radius: var(--avatar-radius);
+    }
+
+    .card-media:before {
+      margin-left: calc(-1 * var(--avatar-size) / 4);
+      animation: card-dot-a 1.5s ease infinite;
+    }
+
+    .card-media:after {
+      margin-left: calc(var(--avatar-size) / 4);
+      animation: card-dot-c 1.5s ease infinite;
+    }
+
+    .card-heading:before {
+      position: absolute;
+      top: calc(var(--avatar-size) / 2 - var(--dot-size) / 2 - var(--title-margin-top));
+      left: calc(-1 * var(--title-margin-left) - var(--avatar-size) / 2 - var(--dot-size) / 2);
+      animation: card-dot-b 1.5s ease infinite;
+    }
+
+    .card-heading,
+    .card-heading::after {
+      position: absolute;
+      height: var(--title-height);
+    }
+
+    .card-heading {
+      top: calc(var(--title-margin-top) + var(--card-padding));
+      left: var(--card-padding);
+      width: calc(85% - var(--avatar-size) - var(--title-margin-left) - var(--card-padding) * 2);
+      margin-left: calc(var(--title-margin-left) + var(--avatar-size));
+    }
+
+    .card-heading::after {
+      top: calc(var(--title-space) + var(--title-height));
+      width: 115%;
+    }
+
+    .card-text,
+    .card-text:before,
+    .card-text:after {
+      height: var(--txt-height);
+    }
+
+    .card-text {
+      width: 95%;
+      margin: calc(var(--txt-space) + var(--txt-height) + var(--txt-margin)) 0 calc(var(--txt-space) + var(--txt-height));
+    }
+
+    .card-text:before {
+      width: 90%;
+      top: calc(-1 * var(--txt-space) - var(--txt-height));
+    }
+
+    .card-text:after {
+      width: 85%;
+      top: calc(var(--txt-space) + var(--txt-height));
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #FFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 单行两端居中 */
+    .justify{
+      display: inline-block;
+      height: 24px;
+      line-height: 24px;
+      width: 300px;
+      text-align: justify;
+      border: 1px solid lightgray;
+    }
+    .justify::after{
+      content: '';
+      width: 100%;
+      display: inline-block;
+      position: relative;
+    }
+
+    /* 单行超出截断 */
+    .wrapper {
+      resize: horizontal;
+      overflow: hidden;
+      width: 200px;
+      padding: 0.5em 1em;
+      border: 1px solid;
+    }
+
+    .overflower { 
+      display: inline-block; 
+      overflow: hidden; 
+      max-width: 100%; 
+      height: 1.5em; 
+      line-height: 1.5em; 
+      white-space: nowrap; 
+      text-overflow: ellipsis; 
+    } 
+    .overflower-long { display: inline; } 
+    .overflower-short { display: none; } 
+
+    @supports (flex-wrap: wrap) { 
+      .overflower { 
+        display: inline-flex; 
+        flex-wrap: wrap; 
+      } 
+      .overflower-short { 
+        display: block; 
+        overflow: hidden; 
+        flex-grow: 1; 
+        width: 0; 
+        text-overflow: ellipsis; 
+      } 
+      .overflower-long { flex-basis: 100%; } 
+    }
+</style>
+</head>
+<body>
+
+  <div class="example">
+    <div class="wrapper">
+      <span class="overflower">
+        <span class="overflower-short" title="如果你调整容器大小，可以看到短文本！">
+          短文本。。。断
+        </span>
+        <span class="overflower-long">
+          慢慢的缩小容器你可以看到短文本和迷你文本的内容!
+        </span>
+      </span>
+    </div>
+  </div>
+
+  <div class="justify">睡多久留饭</div>
+  <div class="card-container">
+    <span class="card-media"></span>
+    <span class="card-heading"></span>
+    <span class="card-text"></span>
+  </div>
+</body>
+
+</html>
